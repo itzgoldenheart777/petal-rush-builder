@@ -23,7 +23,7 @@ export default function AdminUsers() {
 
   useEffect(() => { fetchProfiles(); }, []);
 
-  const updateStatus = async (userId: string, status: string) => {
+  const updateStatus = async (userId: string, status: 'active' | 'pending' | 'suspended') => {
     const { error } = await supabase.from('profiles').update({ status }).eq('user_id', userId);
     if (error) toast({ title: 'Error', description: error.message, variant: 'destructive' });
     else { toast({ title: `User ${status}` }); fetchProfiles(); }
